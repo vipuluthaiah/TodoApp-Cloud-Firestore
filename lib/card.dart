@@ -1,71 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'card.dart';
+// import 'package:intl/intl.dart';
 
-class NoteList extends StatefulWidget {
-  @override
-  _NoteListState createState() => _NoteListState();
-}
+class CustomCard extends StatelessWidget {
+  final QuerySnapshot snapshot;
+  final int index;
 
-class _NoteListState extends State<NoteList> {
-  var firestoreDB = Firestore.instance.collection("board").snapshots();
-
-  TextEditingController nameInputController;
-  TextEditingController titleInputController;
-  TextEditingController descriptionInputController;
-
-  @override
-  void initState() {
-    super.initState();
-    nameInputController = TextEditingController();
-    titleInputController = TextEditingController();
-    descriptionInputController = TextEditingController();
-  }
+  const CustomCard({Key key, this.snapshot, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TextStyle textStyle = Theme.of(context).textTheme.title;
+    var docId = snapshot.documents[index].documentID;
+    var snapshotdata = snapshot.documents[index].data;
+    // var timetodate = new DateTime.fromMillisecondsSinceEpoch(
+    //     snapshot.documents[index].data["timestamp"].seconds * 1000);
+    // var dateFormatted = new DateFormat("EEEE,MMM d,y").format(timetodate);
+    // var name = snapshot.documents[index].data["name"];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("TODO"),
-        centerTitle: true,
-        elevation: 5.0,
-        backgroundColor: Colors.black,
-      ),
+    TextEditingController nameInputController =
+        TextEditingController(text: snapshotdata["name"]);
 
-// body: getNoteListView(),
-      body: StreamBuilder(
-        stream: firestoreDB,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, int index) {
-                  return CustomCard(snapshot: snapshot.data, index: index);
-                });
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showDialog(context);
-        },
-        backgroundColor: Colors.black,
-        tooltip: "Add Tasks",
-        elevation: 0.0,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+    TextEditingController titleInputController =
+        TextEditingController(text: snapshotdata["title"]);
+
+    TextEditingController descriptionInputController =
+        TextEditingController(text: snapshotdata["description"]);
+
+    return Column(
+      children: <Widget>[
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.black,
+          elevation: 5.0,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(
+                  "https://media.giphy.com/media/RMMkV2n8iiQiIu2p9t/giphy.gif"),
+              backgroundColor: Colors.transparent,
+              radius: 32.0,
+            ),
+            // title: Text(),
+            title: Text(
+              snapshot.documents[index].data["title"],
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0),
+            ),
+            subtitle: Text(
+              snapshot.documents[index].data["description"],
+              style: TextStyle(color: Colors.white),
+            ),
+            trailing: GestureDetector(
+              child: Icon(
+                Icons.remove_circle,
+                color: Colors.white,
+              ),
+              onTap: () async {
+                await Firestore.instance
+                    .collection("board")
+                    .document(docId)
+                    .delete();
+              },
+            ),
+            // onTap: () {
+            //   debugPrint("ListTile Tapped");
+            //   // navigateToDetail(this)
+            // },
+          ),
         ),
-      ),
-    );
-  }
-
-  _showDialog(BuildContext context) async {
-    await showDialog(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.mode_edit,
+              size: 15,
+              ),
+             onPressed:()async{
+               await  showDialog(
         context: context,
         child: Padding(
           padding: EdgeInsets.only(bottom: 11.0),
@@ -75,6 +89,21 @@ class _NoteListState extends State<NoteList> {
             ),
             child: ListView(
               children: <Widget>[
+                                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0),
+                  child: TextField(
+                  
+                    style: TextStyle(),
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person),
+                      labelText: "Please Update the list",
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0),
                   child: TextField(
@@ -183,5 +212,12 @@ class _NoteListState extends State<NoteList> {
           ),
         )
         );
+             }
+             
+              )
+          ],
+        )
+      ],
+    );
   }
 }
