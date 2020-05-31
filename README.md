@@ -1,16 +1,38 @@
-# chat
+<h1 align="center">Todo App Flutter</h1>
 
-A new Flutter project.
+<h2 align="center">
+ This  ToDo List app for Task Management/Powered By Firebase
+</h2>
 
-## Getting Started
+<h2 align="center">
+ The app is using Firebase/CloudFirestore
+</h2>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<h2 align="center">
+  <strong>APP UI</strong>
+</h2>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/oh.gif"height="540"/>
+</div>
+
+<div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921915.png"height="540"/>
+</div>
+<div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921889.png"height="540"/>
+</div>
+</div><div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921879.png"height="540"/>
+</div>
+</div><div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921876.png"height="540"/>
+</div>
+</div><div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921848.png"height="540"/>
+</div>
+<h2 align="center">
+  <strong>Todo App</strong>
+</h2>
