@@ -46,7 +46,8 @@ class _NoteListState extends State<NoteList> {
                 child: Column(
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Center(child: Text("NO LIST AVALIABLE"))
+                    
+                    Center(child: Text("NO LIST AVALIABLE",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),))
                   ],
                 ),
               ),
@@ -202,8 +203,8 @@ class _NoteListState extends State<NoteList> {
                           onPressed: () {
                             if (titleInputController.text.isNotEmpty &&
                                 nameInputController.text.isNotEmpty &&
-                                descriptionInputController.text.isNotEmpty &&
-                                priorityInputController.text.isNotEmpty) {
+                                descriptionInputController.text.isNotEmpty 
+                                ) {
                               Firestore.instance.collection("board").add({
                                 "name": nameInputController.text,
                                 "title": titleInputController.text,
