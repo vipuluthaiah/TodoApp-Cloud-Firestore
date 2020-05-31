@@ -17,14 +17,7 @@
 <div align="center">
   <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/oh.gif"height="540"/>
 </div>
-
 <div align="center">
-  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921915.png"height="540"/>
-</div>
-<div align="center">
-  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921889.png"height="540"/>
-</div>
-</div><div align="center">
   <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921879.png"height="540"/>
 </div>
 </div><div align="center">
@@ -33,6 +26,14 @@
 </div><div align="center">
   <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921848.png"height="540"/>
 </div>
+<div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921915.png"height="540"/>
+</div>
+<div align="center">
+  <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921889.png"height="540"/>
+</div>
+</div>
+
 <h2 align="center">
   <strong>Todo App</strong>
 </h2>
