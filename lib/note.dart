@@ -13,6 +13,8 @@ class _NoteListState extends State<NoteList> {
   TextEditingController nameInputController;
   TextEditingController titleInputController;
   TextEditingController descriptionInputController;
+  TextEditingController priorityInputController;
+
 
   @override
   void initState() {
@@ -20,6 +22,7 @@ class _NoteListState extends State<NoteList> {
     nameInputController = TextEditingController();
     titleInputController = TextEditingController();
     descriptionInputController = TextEditingController();
+    priorityInputController =  TextEditingController();
   }
 
   @override
@@ -28,7 +31,7 @@ class _NoteListState extends State<NoteList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("TODO"),
+        title: Text("TODO LIST"),
         centerTitle: true,
         elevation: 5.0,
         backgroundColor: Colors.black,
@@ -53,7 +56,7 @@ class _NoteListState extends State<NoteList> {
         onPressed: () {
           _showDialog(context);
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.redAccent,
         tooltip: "Add Tasks",
         elevation: 0.0,
         child: Icon(
@@ -61,6 +64,7 @@ class _NoteListState extends State<NoteList> {
           color: Colors.white,
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -75,6 +79,26 @@ class _NoteListState extends State<NoteList> {
             ),
             child: ListView(
               children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0),
+                  child: Center(
+                    // child: TextField(
+                    //   style: TextStyle(),
+                    //   decoration: InputDecoration(
+                    //     labelText: "Please Add Your Todo List",
+                    //     labelStyle: TextStyle(
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
+                    child: Text (
+                      "Add Your List",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0),
                   child: TextField(
@@ -122,6 +146,29 @@ class _NoteListState extends State<NoteList> {
                     ),
                   ),
                 ),
+                                                                            Padding(
+                                padding: EdgeInsets.only(
+                                    top: 15.0, bottom: 15.0, left: 15.0),
+                                child: TextField(
+                                  autofocus: true,
+                                  autocorrect: true,
+                                  controller: priorityInputController,
+                                  style: TextStyle(),
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.add_alert),
+                                    labelText: "Priority",
+                                    labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                       Flexible(
+                        child: SizedBox(
+                          height: 80,
+                        ),
+                      ),
                 Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Row(
@@ -138,11 +185,14 @@ class _NoteListState extends State<NoteList> {
                           onPressed: () {
                             if (titleInputController.text.isNotEmpty &&
                                 nameInputController.text.isNotEmpty &&
-                                descriptionInputController.text.isNotEmpty) {
+                                descriptionInputController.text.isNotEmpty&&
+                                priorityInputController.text.isNotEmpty
+                                ) {
                               Firestore.instance.collection("board").add({
                                 "name": nameInputController.text,
                                 "title": titleInputController.text,
                                 "description": descriptionInputController.text,
+                                "priority":priorityInputController.text,
                                 "timestamp": new DateTime.now()
                               }).then((response) {
                                 print(response.documentID);
@@ -150,6 +200,7 @@ class _NoteListState extends State<NoteList> {
                                 nameInputController.clear();
                                 titleInputController.clear();
                                 descriptionInputController.clear();
+                                priorityInputController.clear();
                               }).catchError((error) => print(error));
                             }
                           },
@@ -164,13 +215,14 @@ class _NoteListState extends State<NoteList> {
                           color: Colors.red,
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Delete',
+                            'Cancle',
                             textScaleFactor: 1.5,
                           ),
                           onPressed: () {
                             nameInputController.clear();
                             titleInputController.clear();
                             descriptionInputController.clear();
+                            priorityInputController.clear();
                             Navigator.pop(context);
                           },
                         ),
@@ -181,7 +233,6 @@ class _NoteListState extends State<NoteList> {
               ],
             ),
           ),
-        )
-        );
+        ));
   }
 }

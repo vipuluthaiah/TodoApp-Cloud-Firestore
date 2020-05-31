@@ -54,22 +54,26 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                         Text(
+                      Text(
                         "TODO APP",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 35.0,
                             fontWeight: FontWeight.bold),
                       ),
-                      CircleAvatar(
-                        backgroundImage: NetworkImage("https://media.giphy.com/media/eMUcrIszB83e9qigiZ/giphy.gif"),
-                        backgroundColor: Colors.red,
-                        radius: 80.0,
+                      Flexible(
+                        child: SizedBox(
+                          height: 150,
+                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
+                      Center(
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "https://media.giphy.com/media/eMUcrIszB83e9qigiZ/giphy.gif"),
+                          backgroundColor: Colors.red,
+                          radius: 80.0,
+                        ),
                       ),
-                   
                     ],
                   ),
                 ),
