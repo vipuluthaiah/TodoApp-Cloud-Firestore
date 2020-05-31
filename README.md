@@ -33,6 +33,28 @@
   <img src="https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore/blob/master/screenshot/Screenshot_1590921889.png"height="540"/>
 </div>
 </div>
+## Key Features
+
+* Easily add and remove tasks
+* Minimal UI
+* CloudStorage... 
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Flutter](https://flutter.dev/docs/get-started/install) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/vipuluthaiah/TodoApp-Cloud-Firestore.git
+
+# Go into the repository
+$ cd chat
+
+# Install dependencies
+$ flutter packages get
+
+# Run the app
+$ flutter run
+```
 
 <h2 align="center">
   <strong>Todo App</strong>
