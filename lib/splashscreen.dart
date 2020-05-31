@@ -54,12 +54,16 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        "TODO APP",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35.0,
-                            fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: SizedBox(
+                          height: 100,
+                        ),
+                      ),
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://media.giphy.com/media/eMUcrIszB83e9qigiZ/giphy.gif"),
+                        backgroundColor: Colors.red,
+                        radius: 80.0,
                       ),
                       Flexible(
                         child: SizedBox(
@@ -67,11 +71,12 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                       ),
                       Center(
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              "https://media.giphy.com/media/eMUcrIszB83e9qigiZ/giphy.gif"),
-                          backgroundColor: Colors.red,
-                          radius: 80.0,
+                        child: Text(
+                          "TODO APP",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 33.0,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

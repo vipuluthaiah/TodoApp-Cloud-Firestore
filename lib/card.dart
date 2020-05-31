@@ -15,7 +15,7 @@ class CustomCard extends StatelessWidget {
     var timetodate = new DateTime.fromMillisecondsSinceEpoch(
         snapshot.documents[index].data["timestamp"].seconds * 1000);
     var dateFormatted = new DateFormat("EEEE,MMM d,y").format(timetodate);
-    var name = snapshot.documents[index].data["name"];
+    // var name = snapshot.documents[index].data["name"];
 
     TextEditingController nameInputController =
         TextEditingController(text: snapshotdata["name"]);
@@ -49,20 +49,24 @@ class CustomCard extends StatelessWidget {
             // title: Text(),
             title: Row(
               children: <Widget>[
-                Text(
-                  snapshot.documents[index].data["title"],
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25.0),
+                Flexible(
+                  child: Text(
+                    snapshot.documents[index].data["title"],
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21.0),
+                  ),
                 ),
               ],
             ),
             subtitle: Row(
               children: <Widget>[
-                Text(
-                  snapshot.documents[index].data["description"],
-                  style: TextStyle(color: Colors.white),
+                Flexible(
+                  child: Text(
+                    snapshot.documents[index].data["description"],
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -70,9 +74,11 @@ class CustomCard extends StatelessWidget {
               child: Icon(
                 Icons.clear,
                 color: Colors.white,
+
                 size: 35,
               ),
               onTap: () async {
+                
                 await Firestore.instance
                     .collection("board")
                     .document(docId)
@@ -123,6 +129,7 @@ class CustomCard extends StatelessWidget {
                                     " Update the list",
                                     style: TextStyle(
                                         fontSize: 20,
+                                        color: Colors.redAccent,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -136,7 +143,10 @@ class CustomCard extends StatelessWidget {
                                   controller: nameInputController,
                                   style: TextStyle(),
                                   decoration: InputDecoration(
-                                    icon: Icon(Icons.person),
+                                    icon: Icon(
+                                      Icons.person,
+                                      color: Colors.redAccent,
+                                    ),
                                     labelText: "Your Name",
                                     labelStyle: TextStyle(
                                       fontSize: 20,
@@ -155,7 +165,10 @@ class CustomCard extends StatelessWidget {
                                   autocorrect: true,
                                   decoration: InputDecoration(
                                     labelText: 'Title',
-                                    icon: Icon(Icons.title),
+                                    icon: Icon(
+                                      Icons.title,
+                                      color: Colors.redAccent,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -168,7 +181,10 @@ class CustomCard extends StatelessWidget {
                                   controller: descriptionInputController,
                                   style: TextStyle(),
                                   decoration: InputDecoration(
-                                    icon: Icon(Icons.person),
+                                    icon: Icon(
+                                      Icons.note_add,
+                                      color: Colors.redAccent,
+                                    ),
                                     labelText: "Description",
                                     labelStyle: TextStyle(
                                       fontSize: 20,
@@ -186,18 +202,16 @@ class CustomCard extends StatelessWidget {
                                   controller: priorityInputController,
                                   style: TextStyle(),
                                   decoration: InputDecoration(
-                                    icon: Icon(Icons.add_alert),
+                                    icon: Icon(
+                                      Icons.add_alert,
+                                      color: Colors.redAccent,
+                                    ),
                                     labelText: "Priority",
                                     labelStyle: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ),
-                              ),
-                              Flexible(
-                                child: SizedBox(
-                                  height: 80,
                                 ),
                               ),
                               Padding(
@@ -283,21 +297,21 @@ class CustomCard extends StatelessWidget {
             ),
           ],
         ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                        Icon(Icons.add_alert),
-                          Text(
-                            "      $priority",
-                            style: TextStyle(
-                                color: Colors.redAccent,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0),
-                          ),
-                        ],
-                      ),
-                    ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Icon(Icons.add_alert),
+              Text(
+                "      $priority",
+                style: TextStyle(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

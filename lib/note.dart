@@ -15,14 +15,13 @@ class _NoteListState extends State<NoteList> {
   TextEditingController descriptionInputController;
   TextEditingController priorityInputController;
 
-
   @override
   void initState() {
     super.initState();
     nameInputController = TextEditingController();
     titleInputController = TextEditingController();
     descriptionInputController = TextEditingController();
-    priorityInputController =  TextEditingController();
+    priorityInputController = TextEditingController();
   }
 
   @override
@@ -42,7 +41,16 @@ class _NoteListState extends State<NoteList> {
         stream: firestoreDB,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return Container(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Center(child: Text("NO LIST AVALIABLE"))
+                  ],
+                ),
+              ),
+            );
           } else {
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
@@ -92,10 +100,13 @@ class _NoteListState extends State<NoteList> {
                     //     ),
                     //   ),
                     // ),
-                    child: Text (
+                    child: Text(
                       "Add Your List",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -107,7 +118,10 @@ class _NoteListState extends State<NoteList> {
                     controller: nameInputController,
                     style: TextStyle(),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person),
+                      icon: Icon(
+                        Icons.person,
+                        color: Colors.redAccent,
+                      ),
                       labelText: "Your Name",
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -125,7 +139,10 @@ class _NoteListState extends State<NoteList> {
                     autocorrect: true,
                     decoration: InputDecoration(
                       labelText: 'Title',
-                      icon: Icon(Icons.title),
+                      icon: Icon(
+                        Icons.title,
+                        color: Colors.redAccent,
+                      ),
                     ),
                   ),
                 ),
@@ -137,7 +154,10 @@ class _NoteListState extends State<NoteList> {
                     controller: descriptionInputController,
                     style: TextStyle(),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person),
+                      icon: Icon(
+                        Icons.event_note,
+                        color: Colors.redAccent,
+                      ),
                       labelText: "Description",
                       labelStyle: TextStyle(
                         fontSize: 20,
@@ -146,29 +166,26 @@ class _NoteListState extends State<NoteList> {
                     ),
                   ),
                 ),
-                                                                            Padding(
-                                padding: EdgeInsets.only(
-                                    top: 15.0, bottom: 15.0, left: 15.0),
-                                child: TextField(
-                                  autofocus: true,
-                                  autocorrect: true,
-                                  controller: priorityInputController,
-                                  style: TextStyle(),
-                                  decoration: InputDecoration(
-                                    icon: Icon(Icons.add_alert),
-                                    labelText: "Priority",
-                                    labelStyle: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                       Flexible(
-                        child: SizedBox(
-                          height: 80,
-                        ),
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 15.0),
+                  child: TextField(
+                    autofocus: true,
+                    autocorrect: true,
+                    controller: priorityInputController,
+                    style: TextStyle(),
+                    decoration: InputDecoration(
+                      icon: Icon(
+                        Icons.add_alert,
+                        color: Colors.redAccent,
                       ),
+                      labelText: "Priority",
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Row(
@@ -185,14 +202,13 @@ class _NoteListState extends State<NoteList> {
                           onPressed: () {
                             if (titleInputController.text.isNotEmpty &&
                                 nameInputController.text.isNotEmpty &&
-                                descriptionInputController.text.isNotEmpty&&
-                                priorityInputController.text.isNotEmpty
-                                ) {
+                                descriptionInputController.text.isNotEmpty &&
+                                priorityInputController.text.isNotEmpty) {
                               Firestore.instance.collection("board").add({
                                 "name": nameInputController.text,
                                 "title": titleInputController.text,
                                 "description": descriptionInputController.text,
-                                "priority":priorityInputController.text,
+                                "priority": priorityInputController.text,
                                 "timestamp": new DateTime.now()
                               }).then((response) {
                                 print(response.documentID);
